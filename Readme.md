@@ -29,7 +29,7 @@ This video covers essential Pandas techniques for data cleaning and analysis, de
 
 ## 📝 Note on Video Quality
 
-The video recording quality is moderate due to equipment limitations. If any part is unclear, please refer to the **detailed teaching materials** in this repository, which include:
+The video recording quality is moderate due to equipment limitations. If any part is unclear, please refer to the **speech draft.md** in this repository, which include:
 
 - Complete bilingual lecture script with code examples
 - Step-by-step explanations for each concept
