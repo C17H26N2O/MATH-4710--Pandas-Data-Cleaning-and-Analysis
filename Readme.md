@@ -46,6 +46,11 @@ The video recording quality is moderate due to equipment limitations. If any par
 
 ## 🎯 Hands-On Activity
 
+To apply the concepts learned in the video, please complete the hands-on exercise. The detailed instructions and tasks are in the file below:
+
+- **[Click here to open the exercise task file](./task.md)**
+
+This activity will challenge you to analyze a new business scenario using the same datasets.
 
 ---
 
