@@ -4,7 +4,7 @@
 
 ## 📺 Video Tutorial
 
-**Watch on YouTube:** [Pandas Data Cleaning and Analysis Tutorial](https://www.youtube.com/watch?v=_sBTNRvbjHU)
+**Watch on YouTube:** [Pandas Data Cleaning and Analysis Tutorial](https://youtu.be/_sBTNRvbjHU)
 
 **Duration:** ~50 minutes
 
