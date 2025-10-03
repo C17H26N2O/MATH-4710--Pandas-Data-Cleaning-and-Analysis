@@ -1,0 +1,642 @@
+# Pandas:数据清洗与分析完整演讲稿（中文版）
+
+---
+
+## **视频开场**
+
+**(0:00 - 0:30)**
+
+大家好,欢迎来到今天的课程。我是 Yihan。在接下来的大约45分钟里,我们将一起探索如何使用Pandas这个强大的Python库,将混乱、分散的数据变得井井有条,并从中提取出有价值的商业洞察。无论您是数据分析领域的新手,还是希望系统梳理Pandas核心技能的开发者,本课程都将为您打下坚实的基础。
+
+---
+
+## **第一节:引言与情景设定**
+
+**(0:30 - 3:30)**
+
+我们先不急着讲代码。想象一下这个场景:您是一家全球电商公司新上任的数据分析师。上班第一天,您的老板就交给您一个任务:"我们的欧洲市场,哪个产品类别的实际销售额最高?注意,要排除那些已退货和已取消的订单。"
+
+您拿到了数据,但情况并不理想。数据分散在三个不同的文件里:一个记录交易的CSV文件,一个包含客户信息的JSON文件,还有一个存储产品详情的Excel表格。更糟糕的是,这些数据里有很多缺失值、格式不一致的问题,而且最关键的是——销售额这个字段竟然不存在!您需要自己根据数量、单价和折扣来计算。
+
+为了解决这个问题,我们将遵循一个清晰的七步分析流程。
+首先,我们会**加载**这些不同格式的数据文件。
+第二步,**检视**数据结构,了解我们手上有什么。
+第三,**清理**数据中的缺失信息和格式问题。
+第四,进行**特征工程**,计算出销售额这个关键指标。
+第五,**筛选**出我们只关心的有效欧洲市场数据。
+第六,**排序**数据,发现关键趋势。
+第七,我们会**合并**这三个独立的文件,构建一个统一、完整的数据集。
+最后,也是最关键的一步,我们将对这份干净的数据进行**分组与聚合**,从而精准地回答老板的问题。
+
+---
+
+## **第二节:模块一 - 数据加载与检视**
+
+**(3:30 - 10:00)**
+
+好了,让我们开始动手吧。真实世界的数据以多种格式存在,而Pandas的第一项超能力,就是能将这些不同格式的文件,统一转换成一种叫做"数据帧"(DataFrame)的二维表格结构。这就像一个通用的数据翻译器。
+
+我们先来加载第一个文件,CSV格式的销售记录。我们会使用 `pd.read_csv()` 函数。
+
+```python
+import pandas as pd
+
+# 加载销售记录
+sales_df = pd.read_csv('sales_records.csv')
+```
+
+CSV代表"逗号分隔值",是最常见的数据格式之一。这个函数非常强大,它有很多可选参数,比如 `sep` 可以用来指定不同的分隔符,`usecols` 可以在加载时只选择我们需要的列,这在处理大文件时能有效节省内存。
+
+接下来,我们用 `pd.read_excel()` 来加载产品信息。Excel文件常常包含多个工作表(sheets),所以我们需要用 `sheet_name` 参数来指定读取哪一个。
+
+```python
+# 加载产品信息
+product_df = pd.read_excel('product_info.xlsx', sheet_name='ProductDetails')
+```
+
+最后,我们用 `pd.read_json()` 来加载客户数据。JSON是一种常用于Web API的键值对格式。Pandas甚至可以直接从一个URL加载JSON数据。
+
+```python
+# 加载客户信息
+customer_df = pd.read_json('customer_details.json')
+```
+
+数据加载进来了,但我们绝不能盲目相信它。专业的数据分析师总会先给数据做一个快速的"体检"。我们会用三个非常有用的方法:`.head()`、`.info()` 和 `.describe()`。
+
+```python
+# 预览销售数据的前几行
+print("Sales Data Head:")
+print(sales_df.head())
+
+# 查看数据结构和类型信息
+print("\nSales Data Info:")
+sales_df.info()
+
+# 查看数值列的统计摘要
+print("\nSales Data Statistics:")
+print(sales_df.describe())
+```
+
+`.head()` 可以让我们预览数据的前几行。而 `.info()` 则更加重要,它会告诉我们每一列的数据类型,以及——请注意看这里——非空值的数量。通过对比总行数和非空值数,我们立刻就能发现哪些列存在缺失值。您看,我们的数据有150行,但 `discount` 列只有90个非空值,`list_price` 列有18个缺失值,`region` 列也有3个缺失值。这些就是我们下一步要解决的问题。
+
+---
+
+## **第三节:模块二 - 处理缺失值**
+
+**(10:00 - 20:00)**
+
+数据清洗是数据分析中最耗时但也最关键的环节。一个专业的数据分析师会告诉您,他们80%的时间都花在了清洗数据上。为什么?因为脏数据会导致错误的结论,进而导致错误的商业决策。
+
+我们首先来统计一下每列有多少缺失数据。Pandas用 `NaN`(Not a Number)来表示缺失值。
+
+```python
+# 统计每列的缺失值数量
+print("Missing values per column:")
+print(sales_df.isna().sum())
+
+# 也可以看缺失值的百分比
+print("\nMissing value percentage:")
+print((sales_df.isna().sum() / len(sales_df) * 100).round(2))
+```
+
+好的,现在我们清楚地看到了问题所在。接下来,让我向您展示处理缺失值的两种主要策略。
+
+### **策略一:删除法 - 使用 `dropna()`**
+
+第一种方法简单直接:直接删除包含缺失值的行。让我们看看如果使用这个方法会发生什么。
+
+```python
+# 查看原始数据行数
+print(f"Original dataset: {len(sales_df)} rows")
+
+# 删除任何包含缺失值的行
+cleaned_df_dropped = sales_df.dropna()
+print(f"After dropna(): {len(cleaned_df_dropped)} rows")
+print(f"Lost {len(sales_df) - len(cleaned_df_dropped)} rows ({(len(sales_df) - len(cleaned_df_dropped))/len(sales_df)*100:.1f}%)")
+
+# 查看删除后的数据
+print("\nData after dropping NaN:")
+print(cleaned_df_dropped.info())
+```
+
+您看到了吗?使用 `dropna()` 后,我们从150行数据减少到了大约50行,丢失了三分之二的数据!这就是 `dropna()` 的问题所在——它是一把双刃剑。
+
+什么时候可以使用 `dropna()`?
+- 当缺失数据量非常小(比如少于5%)时
+- 当我们确认这些行对分析确实无用时
+- 当缺失数据是完全随机分布的时候
+
+但在我们的案例中,丢失三分之二的数据显然是不可接受的。这会导致严重的数据偏见,可能会系统性地排除某些重要的客户群体或产品类型。所以,我们需要更精细的方法。
+
+### **策略二:填充法 - 使用 `fillna()`**
+
+更专业的做法是用合理的值来填充缺失值。不同的列需要不同的填充策略。让我逐一演示。
+
+**填充策略 1:用固定值填充**
+
+对于 `discount` 列,缺失值代表没有折扣,所以用 0 填充最合理。
+
+```python
+# 方法1:用0填充discount列
+# 创建副本以保留原始数据
+sales_df_copy = sales_df.copy()
+
+print(f"Discount missing values before: {sales_df_copy['discount'].isna().sum()}")
+sales_df_copy['discount'].fillna(0, inplace=True)
+print(f"Discount missing values after: {sales_df_copy['discount'].isna().sum()}")
+```
+
+**填充策略 2:用字符串"Unknown"填充分类数据**
+
+对于 `region` 列这样的分类数据,缺失值可以用 "Unknown" 标记。
+
+```python
+# 方法2:用"Unknown"填充region列
+print(f"\nRegion missing values before: {sales_df_copy['region'].isna().sum()}")
+sales_df_copy['region'].fillna('Unknown', inplace=True)
+print(f"Region missing values after: {sales_df_copy['region'].isna().sum()}")
+
+# 查看region的分布
+print("\nRegion distribution after filling:")
+print(sales_df_copy['region'].value_counts())
+```
+
+**填充策略 3:用平均值(mean)填充数值数据**
+
+对于 `list_price` 这样的数值列,我们可以用该列的平均值来填充。这在数据呈正态分布时特别有效。
+
+```python
+# 方法3:用平均值填充list_price列
+print(f"\nList_price missing values before: {sales_df_copy['list_price'].isna().sum()}")
+
+# 计算平均值
+mean_price = sales_df_copy['list_price'].mean()
+print(f"Mean list_price: ${mean_price:.2f}")
+
+# 填充缺失值
+sales_df_copy['list_price'].fillna(mean_price, inplace=True)
+print(f"List_price missing values after: {sales_df_copy['list_price'].isna().sum()}")
+```
+
+**填充策略 4:用中位数(median)填充(更稳健的方法)**
+
+但是,平均值容易受到极端值的影响。如果数据中有异常值,中位数通常是更好的选择。让我们对比一下。
+
+```python
+# 方法4:对比使用中位数填充
+# 创建另一个副本
+sales_df_median = sales_df.copy()
+
+# 计算中位数
+median_price = sales_df_median['list_price'].median()
+print(f"\nMedian list_price: ${median_price:.2f}")
+print(f"Mean list_price: ${mean_price:.2f}")
+print(f"Difference: ${abs(mean_price - median_price):.2f}")
+
+# 用中位数填充
+sales_df_median['list_price'].fillna(median_price, inplace=True)
+
+# 对比两种填充方法的结果
+print("\nComparison of filling methods:")
+print(f"Mean-filled data average: ${sales_df_copy['list_price'].mean():.2f}")
+print(f"Median-filled data average: ${sales_df_median['list_price'].mean():.2f}")
+```
+
+您看,中位数更加稳健,不会被极端值所影响。在实际工作中,如果您不确定数据分布,中位数通常是更安全的选择。
+
+### **最佳实践:使用字典为不同列指定不同的填充策略**
+
+最专业的做法是用一个字典,一次性为多个列指定各自最合适的填充值。
+
+```python
+# 最佳实践:使用字典统一处理所有缺失值
+sales_df = sales_df.copy()
+
+# 创建填充值字典
+fill_values = {
+    'discount': 0,                                  # 无折扣用0
+    'region': 'Unknown',                            # 未知地区用Unknown
+    'list_price': sales_df['list_price'].median()  # 价格用中位数
+}
+
+# 一次性填充所有列
+sales_df.fillna(value=fill_values, inplace=True)
+
+# 验证结果
+print("\nFinal missing value check:")
+print(sales_df.isna().sum())
+print("\n数据已清洗完成!")
+```
+
+完美!现在我们的数据已经没有缺失值了,而且我们保留了所有150行数据,没有丢失任何信息。这就是专业的数据清洗方法。
+
+接下来,我们要处理格式不一致的问题。
+
+**标准化 region 列**
+
+```python
+# 查看region列的唯一值
+print("Unique regions before cleaning:")
+print(sales_df['region'].unique())
+
+# 标准化region列:统一转为小写,并将'eu'替换为'europe'
+sales_df['region'] = sales_df['region'].str.lower().str.strip()
+sales_df['region'] = sales_df['region'].replace('eu', 'europe')
+
+print("\nUnique regions after cleaning:")
+print(sales_df['region'].unique())
+```
+
+**标准化 status 列**
+
+```python
+# 查看status列的唯一值
+print("\nUnique statuses before cleaning:")
+print(sales_df['status'].unique())
+
+# 标准化status列
+sales_df['status'] = sales_df['status'].str.lower().str.strip()
+
+# 创建标准化映射字典
+status_mapping = {
+    'shipped': 'Shipped',
+    's': 'Shipped',
+    'returned': 'Returned',
+    'r': 'Returned',
+    'pending': 'Pending',
+    'p': 'Pending',
+    'cancelled': 'Cancelled',
+    'c': 'Cancelled'
+}
+
+sales_df['status'] = sales_df['status'].map(status_mapping)
+
+print("\nUnique statuses after cleaning:")
+print(sales_df['status'].unique())
+```
+
+**标准化 product_id 列并检查重复**
+
+```python
+# 将product_id统一转为小写
+sales_df['product_id'] = sales_df['product_id'].str.lower()
+product_df['product_id'] = product_df['product_id'].str.lower()
+
+# 检查重复行
+duplicates = sales_df.duplicated().sum()
+print(f"\nNumber of duplicate rows: {duplicates}")
+
+# 如果存在重复,删除它们
+if duplicates > 0:
+    print("Duplicate rows found:")
+    print(sales_df[sales_df.duplicated(keep=False)].sort_values('transaction_id'))
+    sales_df.drop_duplicates(inplace=True)
+    print(f"Removed {duplicates} duplicate rows")
+    print(f"Final dataset: {len(sales_df)} rows")
+```
+
+---
+
+## **第四节:模块三 - 特征工程**
+
+**(20:00 - 24:00)**
+
+现在来到了一个非常关键的步骤——特征工程。您可能注意到了,我们的数据集里没有 `sales`(销售额)这一列。这其实很符合真实场景:销售额通常是分析师根据原始数据计算出来的派生字段。
+
+在真实的电商环境中,最终销售额的计算公式是:
+**final_sales = quantity × list_price × (1 - discount)**
+
+这个公式考虑了购买数量、标价,以及任何可能的折扣。让我们来创建这个新列。
+
+```python
+# 创建final_sales列
+sales_df['final_sales'] = sales_df['quantity'] * sales_df['list_price'] * (1 - sales_df['discount'])
+
+# 查看结果
+print("Data with calculated sales:")
+print(sales_df[['transaction_id', 'quantity', 'list_price', 'discount', 'final_sales']].head(10))
+
+# 查看销售额的统计信息
+print("\nSales statistics:")
+print(sales_df['final_sales'].describe())
+```
+
+这就是特征工程的威力!我们从现有的列创造出了一个新的、更有意义的指标。这个 `final_sales` 列将是我们后续分析的核心。
+
+---
+
+## **第五节:模块四 - 筛选与选择数据**
+
+**(24:00 - 29:00)**
+
+数据已经干净并且准备好了,但它包含了全球所有地区的信息,以及所有状态的订单。老板的问题很明确:只关注欧洲市场的有效订单。我们需要进行精确的数据筛选。
+
+在Pandas中,最常用的筛选方式叫做"布尔索引"。我们可以组合多个条件来精确筛选数据。首先,我们只要欧洲地区的数据。其次,我们要排除已退货(Returned)和已取消(Cancelled)的订单,因为这些不代表真实的销售。
+
+```python
+# 方法1:使用布尔索引进行多条件筛选
+valid_europe_sales = sales_df[
+    (sales_df['region'] == 'europe') & 
+    (sales_df['status'].isin(['Shipped', 'Pending']))
+]
+
+print(f"Total transactions: {len(sales_df)}")
+print(f"Valid Europe transactions: {len(valid_europe_sales)}")
+print(f"Percentage: {len(valid_europe_sales)/len(sales_df)*100:.1f}%")
+print(f"\nSample of filtered data:")
+print(valid_europe_sales.head())
+```
+
+这里我们使用了 `&` 运算符来组合条件,还使用了 `.isin()` 方法来检查状态是否在我们指定的有效列表中。注意每个条件都用括号括起来,这很重要。
+
+如果我们还想选择特定的列,最专业的做法是使用 `.loc` 访问器。它的语法是 `df.loc[行条件, 列名列表]`。
+
+```python
+# 方法2:使用.loc同时筛选行和选择列
+europe_key_data = sales_df.loc[
+    (sales_df['region'] == 'europe') & 
+    (sales_df['status'].isin(['Shipped', 'Pending'])),
+    ['transaction_id', 'customer_id', 'product_id', 'final_sales', 'sale_date']
+]
+
+print(europe_key_data.head())
+```
+
+使用 `.loc` 的一个重要原因是它可以避免 `SettingWithCopyWarning` 警告。这种方式意图明确,是官方推荐的最佳实践。
+
+让我们也看看那些被我们过滤掉的订单,了解一下数据的全貌。
+
+```python
+# 查看被排除的订单状态分布
+excluded_orders = sales_df[~sales_df['status'].isin(['Shipped', 'Pending'])]
+print("\nExcluded order status distribution:")
+print(excluded_orders['status'].value_counts())
+print(f"\nTotal excluded: {len(excluded_orders)} orders")
+print(f"Excluded revenue: ${excluded_orders['final_sales'].sum():,.2f}")
+```
+
+---
+
+## **第六节:模块五 - 数据排序**
+
+**(29:00 - 34:00)**
+
+筛选帮我们得到了正确的数据子集,但它们往往是无序的。排序能让我们发现数据中的模式和趋势。Pandas提供了两个主要的排序函数,让我详细演示它们的区别和用法。
+
+### **按值排序 - `sort_values()`**
+
+第一个也是最常用的函数是 `sort_values()`,它根据一列或多列的实际数值进行排序。
+
+**单列排序:**
+
+```python
+# 按销售额降序排列,找出最高的交易
+top_sales = valid_europe_sales.sort_values(by='final_sales', ascending=False)
+
+print("Top 10 transactions by sales value:")
+print(top_sales[['transaction_id', 'product_id', 'quantity', 'final_sales']].head(10))
+
+# 也可以看最低的
+print("\nBottom 5 transactions by sales value:")
+print(top_sales[['transaction_id', 'product_id', 'quantity', 'final_sales']].tail(5))
+```
+
+**多列排序:**
+
+`sort_values()` 的强大之处在于可以同时按多个列排序。这在需要多级排序时非常有用。
+
+```python
+# 多级排序:先按产品ID,再按销售额
+multi_sorted = valid_europe_sales.sort_values(
+    by=['product_id', 'final_sales'],
+    ascending=[True, False]  # 产品ID升序,销售额降序
+)
+
+print("\nMulti-level sort (by product_id, then by final_sales):")
+print(multi_sorted[['transaction_id', 'product_id', 'final_sales', 'sale_date']].head(15))
+
+# 这样我们可以看到每个产品中销售额最高的交易
+```
+
+注意,`ascending` 参数可以是一个列表,为每一列分别指定升序还是降序。这给了我们极大的灵活性。
+
+### **按索引排序 - `sort_index()`**
+
+第二个函数是 `sort_index()`,它不看数据的值,而是根据行的索引标签来排序。这在什么时候有用呢?让我演示几个场景。
+
+**场景1:恢复原始顺序**
+
+当数据经过多次筛选和排序后,索引可能变得混乱。使用 `sort_index()` 可以恢复原始的行顺序。
+
+```python
+# 查看当前索引顺序(经过排序后已经乱了)
+print("Current index after sorting:")
+print(top_sales.index[:20].tolist())
+
+# 使用sort_index恢复原始顺序
+restored_order = top_sales.sort_index()
+print("\nIndex after sort_index():")
+print(restored_order.index[:20].tolist())
+
+# 现在数据按照原始CSV文件的顺序排列了
+print("\nData in original order:")
+print(restored_order[['transaction_id', 'final_sales']].head())
+```
+
+**场景2:当索引本身有意义时**
+
+有时候,我们会将某个有意义的列设置为索引,比如日期或者产品ID。这时 `sort_index()` 就特别有用。
+
+```python
+# 将sale_date设置为索引
+date_indexed = valid_europe_sales.copy()
+date_indexed['sale_date'] = pd.to_datetime(date_indexed['sale_date'])
+date_indexed = date_indexed.set_index('sale_date')
+
+print("\nBefore sorting by date index:")
+print(date_indexed[['transaction_id', 'final_sales']].head())
+
+# 按日期索引排序
+date_sorted = date_indexed.sort_index()
+print("\nAfter sorting by date index:")
+print(date_sorted[['transaction_id', 'final_sales']].head())
+
+# 也可以降序排列(最新的日期在前)
+date_sorted_desc = date_indexed.sort_index(ascending=False)
+print("\nDate sorted descending (newest first):")
+print(date_sorted_desc[['transaction_id', 'final_sales']].head())
+```
+
+### **总结:`sort_values()` vs `sort_index()`**
+
+简单来说:
+- **`sort_values()`**:按列的数据值排序 → 用于发现最大值、最小值、排名
+- **`sort_index()`**:按行的索引标签排序 → 用于恢复顺序、按时间序列排列
+
+两个函数都支持 `ascending` 参数来控制升序或降序,也都支持 `inplace=True` 来直接修改原始DataFrame。
+
+---
+
+## **第七节:模块六 - 合并与连接数据**
+
+**(34:00 - 39:00)**
+
+现在来到关键的一步。我们有三个独立的数据表:销售记录、产品信息和客户信息。要回答"哪个产品类别销售额最高"这个问题,我们必须把产品的类别信息和销售数据连接起来。这就是数据合并的作用。
+
+Pandas中用于此任务的核心函数是 `pd.merge()`。我们将分步进行合并。首先,合并销售数据和产品数据。
+
+```python
+# 第一步:合并有效的欧洲销售数据和产品数据
+merged_df = pd.merge(
+    valid_europe_sales,
+    product_df,
+    on='product_id',
+    how='left'
+)
+
+print("After merging with product data:")
+print(merged_df.head())
+print(f"\nShape: {merged_df.shape}")
+
+# 检查是否有产品信息缺失的情况
+missing_products = merged_df['category'].isna().sum()
+print(f"Transactions with missing product info: {missing_products}")
+```
+
+这里的 `on='product_id'` 指定了用于连接的共同列。`how='left'` 表示我们使用左连接,保留左边表(销售记录)的所有行。如果某个产品在产品表中找不到,相关的产品信息列会显示为 NaN。
+
+接下来,我们将结果与客户数据合并,以获得完整的分析数据集。
+
+```python
+# 第二步:合并上一步结果和客户数据
+full_df = pd.merge(
+    merged_df,
+    customer_df,
+    on='customer_id',
+    how='left'
+)
+
+print("\nFinal merged dataset:")
+print(full_df.head())
+print(f"\nFinal shape: {full_df.shape}")
+print(f"Columns: {list(full_df.columns)}")
+```
+
+让我快速解释一下不同的合并类型。理解这些对于正确处理数据至关重要。
+
+| 连接类型 (`how`) | 类比 | 保留的数据 | 使用场景 |
+|:---|:---|:---|:---|
+| `inner` (内连接) | 两个圆的交集 | 仅保留在**两个**表中键都匹配的行 | 只关心完整匹配的数据 |
+| `left` (左连接) | 保留左边圆的全部 | 保留**左**表的所有行,以及右表中匹配的行 | 保留主表的完整性(如所有销售记录) |
+| `right` (右连接) | 保留右边圆的全部 | 保留**右**表的所有行,以及左表中匹配的行 | 类似left,但主表在右边 |
+| `outer` (外连接) | 两个圆的并集 | 保留**两个**表的所有行,不匹配处用NaN填充 | 需要看到所有数据,包括不匹配的 |
+
+在我们的案例中,使用 `left` 连接确保了不会丢失任何销售记录,即使某些产品或客户信息可能缺失。
+
+---
+
+## **第八节:模块七 - 分组与聚合**
+
+**(39:00 - 45:30)**
+
+太棒了!我们现在终于拥有了一个干净、统一、完整的数据集。现在,我们可以回答老板最初的问题了:欧洲市场哪个产品类别的销售额最高?我们将使用数据分析中最强大的思想之一:"拆分-应用-合并"(Split-Apply-Combine)策略。
+
+这个策略很简单:我们先把数据按某个标准(比如产品类别)**拆分**成不同的小组,然后对每个小组**应用**一个计算(比如求和),最后把所有结果**合并**成一个新的汇总表。
+
+在Pandas中,这通过 `groupby()` 函数实现。让我们来找出欧洲市场每个产品类别的总销售额。
+
+```python
+# 按产品类别分组,并计算每个类别的销售总额
+category_sales = full_df.groupby('category')['final_sales'].sum()
+
+# 排序以找出最畅销的类别
+top_categories = category_sales.sort_values(ascending=False)
+
+print("Sales by Category (Europe, Valid Orders):")
+print(top_categories)
+print(f"\n最畅销类别: {top_categories.index[0]}")
+print(f"销售额: ${top_categories.iloc[0]:,.2f}")
+```
+
+我们来拆解这行核心代码:`full_df.groupby('category')` 完成了"拆分",按类别将数据分组;`['final_sales']` 选择了我们要操作的列;`.sum()` 则是我们"应用"的聚合函数,计算每组的总和。
+
+`groupby()` 的一个强大之处在于,我们可以使用 `.agg()` 方法一次性应用多种聚合函数。让我们创建一个更全面的分析报告。
+
+```python
+# 对每个类别应用多种聚合
+category_summary = full_df.groupby('category').agg(
+    total_sales=('final_sales', 'sum'),
+    average_sale=('final_sales', 'mean'),
+    number_of_transactions=('transaction_id', 'count'),
+    average_discount=('discount', 'mean'),
+    max_single_sale=('final_sales', 'max')
+).round(2)
+
+# 按总销售额排序
+category_summary = category_summary.sort_values(by='total_sales', ascending=False)
+
+print("\n完整的类别分析报告:")
+print(category_summary)
+```
+
+这种"命名聚合"的语法非常清晰易读,是现代Pandas的最佳实践。现在,我们不仅回答了老板的问题,还提供了更丰富的洞察:每个类别的平均订单金额、交易次数、平均折扣率,甚至最高单笔交易。
+
+让我们再做一个有趣的分析:看看不同订单状态的销售分布。
+
+```python
+# 分析不同状态订单的情况(使用完整数据集,不仅仅是欧洲)
+status_analysis = sales_df.groupby('status').agg(
+    transaction_count=('transaction_id', 'count'),
+    total_revenue=('final_sales', 'sum'),
+    avg_order_value=('final_sales', 'mean')
+).round(2)
+
+print("\n订单状态分析:")
+print(status_analysis)
+
+# 计算有效订单的比例
+total_transactions = len(sales_df)
+valid_transactions = len(sales_df[sales_df['status'].isin(['Shipped', 'Pending'])])
+print(f"\n有效订单比例: {valid_transactions/total_transactions*100:.1f}%")
+
+# 计算因退货和取消而损失的潜在收入
+lost_revenue = sales_df[sales_df['status'].isin(['Returned', 'Cancelled'])]['final_sales'].sum()
+print(f"因退货和取消损失的收入: ${lost_revenue:,.2f}")
+```
+
+---
+
+## **第九节:总结与实践挑战**
+
+**(45:30 - 47:00)**
+
+我们成功了!让我回顾一下我们的完整旅程。我们从三个混乱、分散的文件开始,这些文件包含缺失值、格式不一致,甚至连核心的销售额字段都不存在。通过遵循专业的数据分析流程,我们完成了八个关键步骤:
+
+1. **加载数据** - 从CSV、Excel和JSON三种格式导入
+2. **检视数据** - 使用.head()、.info()和.describe()了解数据结构
+3. **清洗数据** - 对比dropna()和fillna(),使用多种填充策略(0、"Unknown"、平均值、中位数)
+4. **特征工程** - 计算final_sales = quantity × list_price × (1 - discount)
+5. **筛选数据** - 只保留欧洲地区的有效订单
+6. **排序数据** - 掌握sort_values()和sort_index()的区别
+7. **合并数据** - 将三个表连接成统一数据集
+8. **分组聚合** - 按类别分析,得出最终答案
+
+这个流程,就是数据分析师使用Pandas解决问题的通用工作流。
+
+我想特别强调今天课程中的几个关键要点:
+
+**第一**,缺失值处理是一门艺术,不是科学。`dropna()` 简单但危险,可能会丢失大量数据。`fillna()` 更灵活,但需要根据业务逻辑选择正确的填充策略。
+
+**第二**,排序看似简单,但要理解 `sort_values()` 和 `sort_index()` 的区别。前者按数据值排序用于分析,后者按索引标签排序用于恢复顺序。
+
+**第三**,特征工程是数据分析的核心技能。真实世界的数据往往不会直接给你想要的指标,你需要自己创造。
+
+**第四**,分组聚合是回答商业问题的利器。掌握了groupby()和agg(),你就能回答几乎所有"哪个...最..."类型的问题。
+
+---
+
+## **视频结尾**
+
+**(47:00 - 47:30)**
+
+感谢您的观看。希望本课程对您有所帮助。请务必完成实践活动,因为亲自动手是最好的学习方式。数据分析不是理论课,而是一门需要大量实践的技能。如果您有任何问题,请随时联系我。记住,每一个专业的数据分析师都是从清洗第一个CSV文件开始的。继续加油,下次再见!
