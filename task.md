@@ -35,7 +35,8 @@ Please complete the data analysis tasks following these steps:
 3. Create two subsets:
    - `usa_sales`: orders where customer country is 'USA'
    - `canada_sales`: orders where customer country is 'Canada'
-#### **Part 6: Data Merging**
-1. Perform a left join between filtered North American sales data and product data
-2. Perform a left join between the result and customer data to create a complete dataset
-3. Check if there is any missing information after merging and report the missing cases
+
+#### **Part 5: Data Sorting**
+1. Find the top 10 transactions with the highest sales amount in the North American market
+2. Perform multi-level sorting by customer ID and sale date
+3. Find the 10 most recent transactions (sorted by date in descending order)
