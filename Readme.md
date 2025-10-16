@@ -52,6 +52,7 @@ To apply the concepts learned in the video, please complete the hands-on exercis
 - **[Click here to open the exercise task file](./task.md)**
 
 This activity will challenge you to analyze a new business scenario using the same datasets.
+(其实照着视频文案里面的代码，改两个数据就OK了😋)
 
 ---
 
