@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>视频文案(包含代码)(只看这个就够了😋).md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="pandas%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E4%B8%8E%E5%88%86%E6%9E%90%E5%AE%8C%E6%95%B4%E6%BC%94%E8%AE%B2%E7%A8%BF%E4%B8%AD%E6%96%87%E7%89%88">Pandas:数据清洗与分析完整演讲稿（中文版）</h1>
+<hr>
+<h2 id="%E8%A7%86%E9%A2%91%E5%BC%80%E5%9C%BA"><strong>视频开场</strong></h2>
+<p><strong>(0:00 - 0:30)</strong></p>
+<p>大家好,欢迎来到今天的课程。我是 Yihan。在接下来的大约45分钟里,我们将一起探索如何使用Pandas这个强大的Python库,将混乱、分散的数据变得井井有条,并从中提取出有价值的商业洞察。无论您是数据分析领域的新手,还是希望系统梳理Pandas核心技能的开发者,本课程都将为您打下坚实的基础。</p>
+<hr>
+<h2 id="%E7%AC%AC%E4%B8%80%E8%8A%82%E5%BC%95%E8%A8%80%E4%B8%8E%E6%83%85%E6%99%AF%E8%AE%BE%E5%AE%9A"><strong>第一节:引言与情景设定</strong></h2>
+<p><strong>(0:30 - 3:30)</strong></p>
+<p>我们先不急着讲代码。想象一下这个场景:您是一家全球电商公司新上任的数据分析师。上班第一天,您的老板就交给您一个任务:&quot;我们的欧洲市场,哪个产品类别的实际销售额最高?注意,要排除那些已退货和已取消的订单。&quot;</p>
+<p>您拿到了数据,但情况并不理想。数据分散在三个不同的文件里:一个记录交易的CSV文件,一个包含客户信息的JSON文件,还有一个存储产品详情的Excel表格。更糟糕的是,这些数据里有很多缺失值、格式不一致的问题,而且最关键的是——销售额这个字段竟然不存在!您需要自己根据数量、单价和折扣来计算。</p>
+<p>为了解决这个问题,我们将遵循一个清晰的七步分析流程。
+首先,我们会<strong>加载</strong>这些不同格式的数据文件。
+第二步,<strong>检视</strong>数据结构,了解我们手上有什么。
+第三,<strong>清理</strong>数据中的缺失信息和格式问题。
+第四,进行<strong>特征工程</strong>,计算出销售额这个关键指标。
+第五,<strong>筛选</strong>出我们只关心的有效欧洲市场数据。
+第六,<strong>排序</strong>数据,发现关键趋势。
+第七,我们会<strong>合并</strong>这三个独立的文件,构建一个统一、完整的数据集。
+最后,也是最关键的一步,我们将对这份干净的数据进行<strong>分组与聚合</strong>,从而精准地回答老板的问题。</p>
+<hr>
+<h2 id="%E7%AC%AC%E4%BA%8C%E8%8A%82%E6%A8%A1%E5%9D%97%E4%B8%80---%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E4%B8%8E%E6%A3%80%E8%A7%86"><strong>第二节:模块一 - 数据加载与检视</strong></h2>
+<p><strong>(3:30 - 10:00)</strong></p>
+<p>好了,让我们开始动手吧。真实世界的数据以多种格式存在,而Pandas的第一项超能力,就是能将这些不同格式的文件,统一转换成一种叫做&quot;数据帧&quot;(DataFrame)的二维表格结构。这就像一个通用的数据翻译器。</p>
+<p>我们先来加载第一个文件,CSV格式的销售记录。我们会使用 <code>pd.read_csv()</code> 函数。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+<span class="hljs-comment"># 加载销售记录</span>
+sales_df = pd.read_csv(<span class="hljs-string">'sales_records.csv'</span>)
+</div></code></pre>
+<p>CSV代表&quot;逗号分隔值&quot;,是最常见的数据格式之一。这个函数非常强大,它有很多可选参数,比如 <code>sep</code> 可以用来指定不同的分隔符,<code>usecols</code> 可以在加载时只选择我们需要的列,这在处理大文件时能有效节省内存。</p>
+<p>接下来,我们用 <code>pd.read_excel()</code> 来加载产品信息。Excel文件常常包含多个工作表(sheets),所以我们需要用 <code>sheet_name</code> 参数来指定读取哪一个。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 加载产品信息</span>
+product_df = pd.read_excel(<span class="hljs-string">'product_info.xlsx'</span>, sheet_name=<span class="hljs-string">'ProductDetails'</span>)
+</div></code></pre>
+<p>最后,我们用 <code>pd.read_json()</code> 来加载客户数据。JSON是一种常用于Web API的键值对格式。Pandas甚至可以直接从一个URL加载JSON数据。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 加载客户信息</span>
+customer_df = pd.read_json(<span class="hljs-string">'customer_details.json'</span>)
+</div></code></pre>
+<p>数据加载进来了,但我们绝不能盲目相信它。专业的数据分析师总会先给数据做一个快速的&quot;体检&quot;。我们会用三个非常有用的方法:<code>.head()</code>、<code>.info()</code> 和 <code>.describe()</code>。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 预览销售数据的前几行</span>
+print(<span class="hljs-string">"Sales Data Head:"</span>)
+print(sales_df.head())
+
+<span class="hljs-comment"># 查看数据结构和类型信息</span>
+print(<span class="hljs-string">"\nSales Data Info:"</span>)
+sales_df.info()
+
+<span class="hljs-comment"># 查看数值列的统计摘要</span>
+print(<span class="hljs-string">"\nSales Data Statistics:"</span>)
+print(sales_df.describe())
+</div></code></pre>
+<p><code>.head()</code> 可以让我们预览数据的前几行。而 <code>.info()</code> 则更加重要,它会告诉我们每一列的数据类型,以及——请注意看这里——非空值的数量。通过对比总行数和非空值数,我们立刻就能发现哪些列存在缺失值。您看,我们的数据有150行,但 <code>discount</code> 列只有90个非空值,<code>list_price</code> 列有18个缺失值,<code>region</code> 列也有3个缺失值。这些就是我们下一步要解决的问题。</p>
+<hr>
+<h2 id="%E7%AC%AC%E4%B8%89%E8%8A%82%E6%A8%A1%E5%9D%97%E4%BA%8C---%E5%A4%84%E7%90%86%E7%BC%BA%E5%A4%B1%E5%80%BC"><strong>第三节:模块二 - 处理缺失值</strong></h2>
+<p><strong>(10:00 - 20:00)</strong></p>
+<p>数据清洗是数据分析中最耗时但也最关键的环节。一个专业的数据分析师会告诉您,他们80%的时间都花在了清洗数据上。为什么?因为脏数据会导致错误的结论,进而导致错误的商业决策。</p>
+<p>我们首先来统计一下每列有多少缺失数据。Pandas用 <code>NaN</code>(Not a Number)来表示缺失值。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 统计每列的缺失值数量</span>
+print(<span class="hljs-string">"Missing values per column:"</span>)
+print(sales_df.isna().sum())
+
+<span class="hljs-comment"># 也可以看缺失值的百分比</span>
+print(<span class="hljs-string">"\nMissing value percentage:"</span>)
+print((sales_df.isna().sum() / len(sales_df) * <span class="hljs-number">100</span>).round(<span class="hljs-number">2</span>))
+</div></code></pre>
+<p>好的,现在我们清楚地看到了问题所在。接下来,让我向您展示处理缺失值的两种主要策略。</p>
+<h3 id="%E7%AD%96%E7%95%A5%E4%B8%80%E5%88%A0%E9%99%A4%E6%B3%95---%E4%BD%BF%E7%94%A8-dropna"><strong>策略一:删除法 - 使用 <code>dropna()</code></strong></h3>
+<p>第一种方法简单直接:直接删除包含缺失值的行。让我们看看如果使用这个方法会发生什么。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 查看原始数据行数</span>
+print(<span class="hljs-string">f"Original dataset: <span class="hljs-subst">{len(sales_df)}</span> rows"</span>)
+
+<span class="hljs-comment"># 删除任何包含缺失值的行</span>
+cleaned_df_dropped = sales_df.dropna()
+print(<span class="hljs-string">f"After dropna(): <span class="hljs-subst">{len(cleaned_df_dropped)}</span> rows"</span>)
+print(<span class="hljs-string">f"Lost <span class="hljs-subst">{len(sales_df) - len(cleaned_df_dropped)}</span> rows (<span class="hljs-subst">{(len(sales_df) - len(cleaned_df_dropped))/len(sales_df)*<span class="hljs-number">100</span>:<span class="hljs-number">.1</span>f}</span>%)"</span>)
+
+<span class="hljs-comment"># 查看删除后的数据</span>
+print(<span class="hljs-string">"\nData after dropping NaN:"</span>)
+print(cleaned_df_dropped.info())
+</div></code></pre>
+<p>您看到了吗?使用 <code>dropna()</code> 后,我们从150行数据减少到了大约50行,丢失了三分之二的数据!这就是 <code>dropna()</code> 的问题所在——它是一把双刃剑。</p>
+<p>什么时候可以使用 <code>dropna()</code>?</p>
+<ul>
+<li>当缺失数据量非常小(比如少于5%)时</li>
+<li>当我们确认这些行对分析确实无用时</li>
+<li>当缺失数据是完全随机分布的时候</li>
+</ul>
+<p>但在我们的案例中,丢失三分之二的数据显然是不可接受的。这会导致严重的数据偏见,可能会系统性地排除某些重要的客户群体或产品类型。所以,我们需要更精细的方法。</p>
+<h3 id="%E7%AD%96%E7%95%A5%E4%BA%8C%E5%A1%AB%E5%85%85%E6%B3%95---%E4%BD%BF%E7%94%A8-fillna"><strong>策略二:填充法 - 使用 <code>fillna()</code></strong></h3>
+<p>更专业的做法是用合理的值来填充缺失值。不同的列需要不同的填充策略。让我逐一演示。</p>
+<p><strong>填充策略 1:用固定值填充</strong></p>
+<p>对于 <code>discount</code> 列,缺失值代表没有折扣,所以用 0 填充最合理。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 方法1:用0填充discount列</span>
+<span class="hljs-comment"># 创建副本以保留原始数据</span>
+sales_df_copy = sales_df.copy()
+
+print(<span class="hljs-string">f"Discount missing values before: <span class="hljs-subst">{sales_df_copy[<span class="hljs-string">'discount'</span>].isna().sum()}</span>"</span>)
+sales_df_copy[<span class="hljs-string">'discount'</span>].fillna(<span class="hljs-number">0</span>, inplace=<span class="hljs-literal">True</span>)
+print(<span class="hljs-string">f"Discount missing values after: <span class="hljs-subst">{sales_df_copy[<span class="hljs-string">'discount'</span>].isna().sum()}</span>"</span>)
+</div></code></pre>
+<p><strong>填充策略 2:用字符串&quot;Unknown&quot;填充分类数据</strong></p>
+<p>对于 <code>region</code> 列这样的分类数据,缺失值可以用 &quot;Unknown&quot; 标记。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 方法2:用"Unknown"填充region列</span>
+print(<span class="hljs-string">f"\nRegion missing values before: <span class="hljs-subst">{sales_df_copy[<span class="hljs-string">'region'</span>].isna().sum()}</span>"</span>)
+sales_df_copy[<span class="hljs-string">'region'</span>].fillna(<span class="hljs-string">'Unknown'</span>, inplace=<span class="hljs-literal">True</span>)
+print(<span class="hljs-string">f"Region missing values after: <span class="hljs-subst">{sales_df_copy[<span class="hljs-string">'region'</span>].isna().sum()}</span>"</span>)
+
+<span class="hljs-comment"># 查看region的分布</span>
+print(<span class="hljs-string">"\nRegion distribution after filling:"</span>)
+print(sales_df_copy[<span class="hljs-string">'region'</span>].value_counts())
+</div></code></pre>
+<p><strong>填充策略 3:用平均值(mean)填充数值数据</strong></p>
+<p>对于 <code>list_price</code> 这样的数值列,我们可以用该列的平均值来填充。这在数据呈正态分布时特别有效。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 方法3:用平均值填充list_price列</span>
+print(<span class="hljs-string">f"\nList_price missing values before: <span class="hljs-subst">{sales_df_copy[<span class="hljs-string">'list_price'</span>].isna().sum()}</span>"</span>)
+
+<span class="hljs-comment"># 计算平均值</span>
+mean_price = sales_df_copy[<span class="hljs-string">'list_price'</span>].mean()
+print(<span class="hljs-string">f"Mean list_price: $<span class="hljs-subst">{mean_price:<span class="hljs-number">.2</span>f}</span>"</span>)
+
+<span class="hljs-comment"># 填充缺失值</span>
+sales_df_copy[<span class="hljs-string">'list_price'</span>].fillna(mean_price, inplace=<span class="hljs-literal">True</span>)
+print(<span class="hljs-string">f"List_price missing values after: <span class="hljs-subst">{sales_df_copy[<span class="hljs-string">'list_price'</span>].isna().sum()}</span>"</span>)
+</div></code></pre>
+<p><strong>填充策略 4:用中位数(median)填充(更稳健的方法)</strong></p>
+<p>但是,平均值容易受到极端值的影响。如果数据中有异常值,中位数通常是更好的选择。让我们对比一下。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 方法4:对比使用中位数填充</span>
+<span class="hljs-comment"># 创建另一个副本</span>
+sales_df_median = sales_df.copy()
+
+<span class="hljs-comment"># 计算中位数</span>
+median_price = sales_df_median[<span class="hljs-string">'list_price'</span>].median()
+print(<span class="hljs-string">f"\nMedian list_price: $<span class="hljs-subst">{median_price:<span class="hljs-number">.2</span>f}</span>"</span>)
+print(<span class="hljs-string">f"Mean list_price: $<span class="hljs-subst">{mean_price:<span class="hljs-number">.2</span>f}</span>"</span>)
+print(<span class="hljs-string">f"Difference: $<span class="hljs-subst">{abs(mean_price - median_price):<span class="hljs-number">.2</span>f}</span>"</span>)
+
+<span class="hljs-comment"># 用中位数填充</span>
+sales_df_median[<span class="hljs-string">'list_price'</span>].fillna(median_price, inplace=<span class="hljs-literal">True</span>)
+
+<span class="hljs-comment"># 对比两种填充方法的结果</span>
+print(<span class="hljs-string">"\nComparison of filling methods:"</span>)
+print(<span class="hljs-string">f"Mean-filled data average: $<span class="hljs-subst">{sales_df_copy[<span class="hljs-string">'list_price'</span>].mean():<span class="hljs-number">.2</span>f}</span>"</span>)
+print(<span class="hljs-string">f"Median-filled data average: $<span class="hljs-subst">{sales_df_median[<span class="hljs-string">'list_price'</span>].mean():<span class="hljs-number">.2</span>f}</span>"</span>)
+</div></code></pre>
+<p>您看,中位数更加稳健,不会被极端值所影响。在实际工作中,如果您不确定数据分布,中位数通常是更安全的选择。</p>
+<h3 id="%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E4%BD%BF%E7%94%A8%E5%AD%97%E5%85%B8%E4%B8%BA%E4%B8%8D%E5%90%8C%E5%88%97%E6%8C%87%E5%AE%9A%E4%B8%8D%E5%90%8C%E7%9A%84%E5%A1%AB%E5%85%85%E7%AD%96%E7%95%A5"><strong>最佳实践:使用字典为不同列指定不同的填充策略</strong></h3>
+<p>最专业的做法是用一个字典,一次性为多个列指定各自最合适的填充值。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 最佳实践:使用字典统一处理所有缺失值</span>
+sales_df = sales_df.copy()
+
+<span class="hljs-comment"># 创建填充值字典</span>
+fill_values = {
+    <span class="hljs-string">'discount'</span>: <span class="hljs-number">0</span>,                                  <span class="hljs-comment"># 无折扣用0</span>
+    <span class="hljs-string">'region'</span>: <span class="hljs-string">'Unknown'</span>,                            <span class="hljs-comment"># 未知地区用Unknown</span>
+    <span class="hljs-string">'list_price'</span>: sales_df[<span class="hljs-string">'list_price'</span>].median()  <span class="hljs-comment"># 价格用中位数</span>
+}
+
+<span class="hljs-comment"># 一次性填充所有列</span>
+sales_df.fillna(value=fill_values, inplace=<span class="hljs-literal">True</span>)
+
+<span class="hljs-comment"># 验证结果</span>
+print(<span class="hljs-string">"\nFinal missing value check:"</span>)
+print(sales_df.isna().sum())
+print(<span class="hljs-string">"\n数据已清洗完成!"</span>)
+</div></code></pre>
+<p>完美!现在我们的数据已经没有缺失值了,而且我们保留了所有150行数据,没有丢失任何信息。这就是专业的数据清洗方法。</p>
+<p>接下来,我们要处理格式不一致的问题。</p>
+<p><strong>标准化 region 列</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 查看region列的唯一值</span>
+print(<span class="hljs-string">"Unique regions before cleaning:"</span>)
+print(sales_df[<span class="hljs-string">'region'</span>].unique())
+
+<span class="hljs-comment"># 标准化region列:统一转为小写,并将'eu'替换为'europe'</span>
+sales_df[<span class="hljs-string">'region'</span>] = sales_df[<span class="hljs-string">'region'</span>].str.lower().str.strip()
+sales_df[<span class="hljs-string">'region'</span>] = sales_df[<span class="hljs-string">'region'</span>].replace(<span class="hljs-string">'eu'</span>, <span class="hljs-string">'europe'</span>)
+
+print(<span class="hljs-string">"\nUnique regions after cleaning:"</span>)
+print(sales_df[<span class="hljs-string">'region'</span>].unique())
+</div></code></pre>
+<p><strong>标准化 status 列</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 查看status列的唯一值</span>
+print(<span class="hljs-string">"\nUnique statuses before cleaning:"</span>)
+print(sales_df[<span class="hljs-string">'status'</span>].unique())
+
+<span class="hljs-comment"># 标准化status列</span>
+sales_df[<span class="hljs-string">'status'</span>] = sales_df[<span class="hljs-string">'status'</span>].str.lower().str.strip()
+
+<span class="hljs-comment"># 创建标准化映射字典</span>
+status_mapping = {
+    <span class="hljs-string">'shipped'</span>: <span class="hljs-string">'Shipped'</span>,
+    <span class="hljs-string">'s'</span>: <span class="hljs-string">'Shipped'</span>,
+    <span class="hljs-string">'returned'</span>: <span class="hljs-string">'Returned'</span>,
+    <span class="hljs-string">'r'</span>: <span class="hljs-string">'Returned'</span>,
+    <span class="hljs-string">'pending'</span>: <span class="hljs-string">'Pending'</span>,
+    <span class="hljs-string">'p'</span>: <span class="hljs-string">'Pending'</span>,
+    <span class="hljs-string">'cancelled'</span>: <span class="hljs-string">'Cancelled'</span>,
+    <span class="hljs-string">'c'</span>: <span class="hljs-string">'Cancelled'</span>
+}
+
+sales_df[<span class="hljs-string">'status'</span>] = sales_df[<span class="hljs-string">'status'</span>].map(status_mapping)
+
+print(<span class="hljs-string">"\nUnique statuses after cleaning:"</span>)
+print(sales_df[<span class="hljs-string">'status'</span>].unique())
+</div></code></pre>
+<p><strong>标准化 product_id 列并检查重复</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 将product_id统一转为小写</span>
+sales_df[<span class="hljs-string">'product_id'</span>] = sales_df[<span class="hljs-string">'product_id'</span>].str.lower()
+product_df[<span class="hljs-string">'product_id'</span>] = product_df[<span class="hljs-string">'product_id'</span>].str.lower()
+
+<span class="hljs-comment"># 检查重复行</span>
+duplicates = sales_df.duplicated().sum()
+print(<span class="hljs-string">f"\nNumber of duplicate rows: <span class="hljs-subst">{duplicates}</span>"</span>)
+
+<span class="hljs-comment"># 如果存在重复,删除它们</span>
+<span class="hljs-keyword">if</span> duplicates &gt; <span class="hljs-number">0</span>:
+    print(<span class="hljs-string">"Duplicate rows found:"</span>)
+    print(sales_df[sales_df.duplicated(keep=<span class="hljs-literal">False</span>)].sort_values(<span class="hljs-string">'transaction_id'</span>))
+    sales_df.drop_duplicates(inplace=<span class="hljs-literal">True</span>)
+    print(<span class="hljs-string">f"Removed <span class="hljs-subst">{duplicates}</span> duplicate rows"</span>)
+    print(<span class="hljs-string">f"Final dataset: <span class="hljs-subst">{len(sales_df)}</span> rows"</span>)
+</div></code></pre>
+<hr>
+<h2 id="%E7%AC%AC%E5%9B%9B%E8%8A%82%E6%A8%A1%E5%9D%97%E4%B8%89---%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B"><strong>第四节:模块三 - 特征工程</strong></h2>
+<p><strong>(20:00 - 24:00)</strong></p>
+<p>现在来到了一个非常关键的步骤——特征工程。您可能注意到了,我们的数据集里没有 <code>sales</code>(销售额)这一列。这其实很符合真实场景:销售额通常是分析师根据原始数据计算出来的派生字段。</p>
+<p>在真实的电商环境中,最终销售额的计算公式是:
+<strong>final_sales = quantity × list_price × (1 - discount)</strong></p>
+<p>这个公式考虑了购买数量、标价,以及任何可能的折扣。让我们来创建这个新列。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 创建final_sales列</span>
+sales_df[<span class="hljs-string">'final_sales'</span>] = sales_df[<span class="hljs-string">'quantity'</span>] * sales_df[<span class="hljs-string">'list_price'</span>] * (<span class="hljs-number">1</span> - sales_df[<span class="hljs-string">'discount'</span>])
+
+<span class="hljs-comment"># 查看结果</span>
+print(<span class="hljs-string">"Data with calculated sales:"</span>)
+print(sales_df[[<span class="hljs-string">'transaction_id'</span>, <span class="hljs-string">'quantity'</span>, <span class="hljs-string">'list_price'</span>, <span class="hljs-string">'discount'</span>, <span class="hljs-string">'final_sales'</span>]].head(<span class="hljs-number">10</span>))
+
+<span class="hljs-comment"># 查看销售额的统计信息</span>
+print(<span class="hljs-string">"\nSales statistics:"</span>)
+print(sales_df[<span class="hljs-string">'final_sales'</span>].describe())
+</div></code></pre>
+<p>这就是特征工程的威力!我们从现有的列创造出了一个新的、更有意义的指标。这个 <code>final_sales</code> 列将是我们后续分析的核心。</p>
+<hr>
+<h2 id="%E7%AC%AC%E4%BA%94%E8%8A%82%E6%A8%A1%E5%9D%97%E5%9B%9B---%E7%AD%9B%E9%80%89%E4%B8%8E%E9%80%89%E6%8B%A9%E6%95%B0%E6%8D%AE"><strong>第五节:模块四 - 筛选与选择数据</strong></h2>
+<p><strong>(24:00 - 29:00)</strong></p>
+<p>数据已经干净并且准备好了,但它包含了全球所有地区的信息,以及所有状态的订单。老板的问题很明确:只关注欧洲市场的有效订单。我们需要进行精确的数据筛选。</p>
+<p>在Pandas中,最常用的筛选方式叫做&quot;布尔索引&quot;。我们可以组合多个条件来精确筛选数据。首先,我们只要欧洲地区的数据。其次,我们要排除已退货(Returned)和已取消(Cancelled)的订单,因为这些不代表真实的销售。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 方法1:使用布尔索引进行多条件筛选</span>
+valid_europe_sales = sales_df[
+    (sales_df[<span class="hljs-string">'region'</span>] == <span class="hljs-string">'europe'</span>) &amp; 
+    (sales_df[<span class="hljs-string">'status'</span>].isin([<span class="hljs-string">'Shipped'</span>, <span class="hljs-string">'Pending'</span>]))
+]
+
+print(<span class="hljs-string">f"Total transactions: <span class="hljs-subst">{len(sales_df)}</span>"</span>)
+print(<span class="hljs-string">f"Valid Europe transactions: <span class="hljs-subst">{len(valid_europe_sales)}</span>"</span>)
+print(<span class="hljs-string">f"Percentage: <span class="hljs-subst">{len(valid_europe_sales)/len(sales_df)*<span class="hljs-number">100</span>:<span class="hljs-number">.1</span>f}</span>%"</span>)
+print(<span class="hljs-string">f"\nSample of filtered data:"</span>)
+print(valid_europe_sales.head())
+</div></code></pre>
+<p>这里我们使用了 <code>&amp;</code> 运算符来组合条件,还使用了 <code>.isin()</code> 方法来检查状态是否在我们指定的有效列表中。注意每个条件都用括号括起来,这很重要。</p>
+<p>如果我们还想选择特定的列,最专业的做法是使用 <code>.loc</code> 访问器。它的语法是 <code>df.loc[行条件, 列名列表]</code>。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 方法2:使用.loc同时筛选行和选择列</span>
+europe_key_data = sales_df.loc[
+    (sales_df[<span class="hljs-string">'region'</span>] == <span class="hljs-string">'europe'</span>) &amp; 
+    (sales_df[<span class="hljs-string">'status'</span>].isin([<span class="hljs-string">'Shipped'</span>, <span class="hljs-string">'Pending'</span>])),
+    [<span class="hljs-string">'transaction_id'</span>, <span class="hljs-string">'customer_id'</span>, <span class="hljs-string">'product_id'</span>, <span class="hljs-string">'final_sales'</span>, <span class="hljs-string">'sale_date'</span>]
+]
+
+print(europe_key_data.head())
+</div></code></pre>
+<p>使用 <code>.loc</code> 的一个重要原因是它可以避免 <code>SettingWithCopyWarning</code> 警告。这种方式意图明确,是官方推荐的最佳实践。</p>
+<p>让我们也看看那些被我们过滤掉的订单,了解一下数据的全貌。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 查看被排除的订单状态分布</span>
+excluded_orders = sales_df[~sales_df[<span class="hljs-string">'status'</span>].isin([<span class="hljs-string">'Shipped'</span>, <span class="hljs-string">'Pending'</span>])]
+print(<span class="hljs-string">"\nExcluded order status distribution:"</span>)
+print(excluded_orders[<span class="hljs-string">'status'</span>].value_counts())
+print(<span class="hljs-string">f"\nTotal excluded: <span class="hljs-subst">{len(excluded_orders)}</span> orders"</span>)
+print(<span class="hljs-string">f"Excluded revenue: $<span class="hljs-subst">{excluded_orders[<span class="hljs-string">'final_sales'</span>].sum():,<span class="hljs-number">.2</span>f}</span>"</span>)
+</div></code></pre>
+<hr>
+<h2 id="%E7%AC%AC%E5%85%AD%E8%8A%82%E6%A8%A1%E5%9D%97%E4%BA%94---%E6%95%B0%E6%8D%AE%E6%8E%92%E5%BA%8F"><strong>第六节:模块五 - 数据排序</strong></h2>
+<p><strong>(29:00 - 34:00)</strong></p>
+<p>筛选帮我们得到了正确的数据子集,但它们往往是无序的。排序能让我们发现数据中的模式和趋势。Pandas提供了两个主要的排序函数,让我详细演示它们的区别和用法。</p>
+<h3 id="%E6%8C%89%E5%80%BC%E6%8E%92%E5%BA%8F---sortvalues"><strong>按值排序 - <code>sort_values()</code></strong></h3>
+<p>第一个也是最常用的函数是 <code>sort_values()</code>,它根据一列或多列的实际数值进行排序。</p>
+<p><strong>单列排序:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 按销售额降序排列,找出最高的交易</span>
+top_sales = valid_europe_sales.sort_values(by=<span class="hljs-string">'final_sales'</span>, ascending=<span class="hljs-literal">False</span>)
+
+print(<span class="hljs-string">"Top 10 transactions by sales value:"</span>)
+print(top_sales[[<span class="hljs-string">'transaction_id'</span>, <span class="hljs-string">'product_id'</span>, <span class="hljs-string">'quantity'</span>, <span class="hljs-string">'final_sales'</span>]].head(<span class="hljs-number">10</span>))
+
+<span class="hljs-comment"># 也可以看最低的</span>
+print(<span class="hljs-string">"\nBottom 5 transactions by sales value:"</span>)
+print(top_sales[[<span class="hljs-string">'transaction_id'</span>, <span class="hljs-string">'product_id'</span>, <span class="hljs-string">'quantity'</span>, <span class="hljs-string">'final_sales'</span>]].tail(<span class="hljs-number">5</span>))
+</div></code></pre>
+<p><strong>多列排序:</strong></p>
+<p><code>sort_values()</code> 的强大之处在于可以同时按多个列排序。这在需要多级排序时非常有用。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 多级排序:先按产品ID,再按销售额</span>
+multi_sorted = valid_europe_sales.sort_values(
+    by=[<span class="hljs-string">'product_id'</span>, <span class="hljs-string">'final_sales'</span>],
+    ascending=[<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]  <span class="hljs-comment"># 产品ID升序,销售额降序</span>
+)
+
+print(<span class="hljs-string">"\nMulti-level sort (by product_id, then by final_sales):"</span>)
+print(multi_sorted[[<span class="hljs-string">'transaction_id'</span>, <span class="hljs-string">'product_id'</span>, <span class="hljs-string">'final_sales'</span>, <span class="hljs-string">'sale_date'</span>]].head(<span class="hljs-number">15</span>))
+
+<span class="hljs-comment"># 这样我们可以看到每个产品中销售额最高的交易</span>
+</div></code></pre>
+<p>注意,<code>ascending</code> 参数可以是一个列表,为每一列分别指定升序还是降序。这给了我们极大的灵活性。</p>
+<h3 id="%E6%8C%89%E7%B4%A2%E5%BC%95%E6%8E%92%E5%BA%8F---sortindex"><strong>按索引排序 - <code>sort_index()</code></strong></h3>
+<p>第二个函数是 <code>sort_index()</code>,它不看数据的值,而是根据行的索引标签来排序。这在什么时候有用呢?让我演示几个场景。</p>
+<p><strong>场景1:恢复原始顺序</strong></p>
+<p>当数据经过多次筛选和排序后,索引可能变得混乱。使用 <code>sort_index()</code> 可以恢复原始的行顺序。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 查看当前索引顺序(经过排序后已经乱了)</span>
+print(<span class="hljs-string">"Current index after sorting:"</span>)
+print(top_sales.index[:<span class="hljs-number">20</span>].tolist())
+
+<span class="hljs-comment"># 使用sort_index恢复原始顺序</span>
+restored_order = top_sales.sort_index()
+print(<span class="hljs-string">"\nIndex after sort_index():"</span>)
+print(restored_order.index[:<span class="hljs-number">20</span>].tolist())
+
+<span class="hljs-comment"># 现在数据按照原始CSV文件的顺序排列了</span>
+print(<span class="hljs-string">"\nData in original order:"</span>)
+print(restored_order[[<span class="hljs-string">'transaction_id'</span>, <span class="hljs-string">'final_sales'</span>]].head())
+</div></code></pre>
+<p><strong>场景2:当索引本身有意义时</strong></p>
+<p>有时候,我们会将某个有意义的列设置为索引,比如日期或者产品ID。这时 <code>sort_index()</code> 就特别有用。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 将sale_date设置为索引</span>
+date_indexed = valid_europe_sales.copy()
+date_indexed[<span class="hljs-string">'sale_date'</span>] = pd.to_datetime(date_indexed[<span class="hljs-string">'sale_date'</span>])
+date_indexed = date_indexed.set_index(<span class="hljs-string">'sale_date'</span>)
+
+print(<span class="hljs-string">"\nBefore sorting by date index:"</span>)
+print(date_indexed[[<span class="hljs-string">'transaction_id'</span>, <span class="hljs-string">'final_sales'</span>]].head())
+
+<span class="hljs-comment"># 按日期索引排序</span>
+date_sorted = date_indexed.sort_index()
+print(<span class="hljs-string">"\nAfter sorting by date index:"</span>)
+print(date_sorted[[<span class="hljs-string">'transaction_id'</span>, <span class="hljs-string">'final_sales'</span>]].head())
+
+<span class="hljs-comment"># 也可以降序排列(最新的日期在前)</span>
+date_sorted_desc = date_indexed.sort_index(ascending=<span class="hljs-literal">False</span>)
+print(<span class="hljs-string">"\nDate sorted descending (newest first):"</span>)
+print(date_sorted_desc[[<span class="hljs-string">'transaction_id'</span>, <span class="hljs-string">'final_sales'</span>]].head())
+</div></code></pre>
+<h3 id="%E6%80%BB%E7%BB%93sortvalues-vs-sortindex"><strong>总结:<code>sort_values()</code> vs <code>sort_index()</code></strong></h3>
+<p>简单来说:</p>
+<ul>
+<li><strong><code>sort_values()</code></strong>:按列的数据值排序 → 用于发现最大值、最小值、排名</li>
+<li><strong><code>sort_index()</code></strong>:按行的索引标签排序 → 用于恢复顺序、按时间序列排列</li>
+</ul>
+<p>两个函数都支持 <code>ascending</code> 参数来控制升序或降序,也都支持 <code>inplace=True</code> 来直接修改原始DataFrame。</p>
+<hr>
+<h2 id="%E7%AC%AC%E4%B8%83%E8%8A%82%E6%A8%A1%E5%9D%97%E5%85%AD---%E5%90%88%E5%B9%B6%E4%B8%8E%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE"><strong>第七节:模块六 - 合并与连接数据</strong></h2>
+<p><strong>(34:00 - 39:00)</strong></p>
+<p>现在来到关键的一步。我们有三个独立的数据表:销售记录、产品信息和客户信息。要回答&quot;哪个产品类别销售额最高&quot;这个问题,我们必须把产品的类别信息和销售数据连接起来。这就是数据合并的作用。</p>
+<p>Pandas中用于此任务的核心函数是 <code>pd.merge()</code>。我们将分步进行合并。首先,合并销售数据和产品数据。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 第一步:合并有效的欧洲销售数据和产品数据</span>
+merged_df = pd.merge(
+    valid_europe_sales,
+    product_df,
+    on=<span class="hljs-string">'product_id'</span>,
+    how=<span class="hljs-string">'left'</span>
+)
+
+print(<span class="hljs-string">"After merging with product data:"</span>)
+print(merged_df.head())
+print(<span class="hljs-string">f"\nShape: <span class="hljs-subst">{merged_df.shape}</span>"</span>)
+
+<span class="hljs-comment"># 检查是否有产品信息缺失的情况</span>
+missing_products = merged_df[<span class="hljs-string">'category'</span>].isna().sum()
+print(<span class="hljs-string">f"Transactions with missing product info: <span class="hljs-subst">{missing_products}</span>"</span>)
+</div></code></pre>
+<p>这里的 <code>on='product_id'</code> 指定了用于连接的共同列。<code>how='left'</code> 表示我们使用左连接,保留左边表(销售记录)的所有行。如果某个产品在产品表中找不到,相关的产品信息列会显示为 NaN。</p>
+<p>接下来,我们将结果与客户数据合并,以获得完整的分析数据集。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 第二步:合并上一步结果和客户数据</span>
+full_df = pd.merge(
+    merged_df,
+    customer_df,
+    on=<span class="hljs-string">'customer_id'</span>,
+    how=<span class="hljs-string">'left'</span>
+)
+
+print(<span class="hljs-string">"\nFinal merged dataset:"</span>)
+print(full_df.head())
+print(<span class="hljs-string">f"\nFinal shape: <span class="hljs-subst">{full_df.shape}</span>"</span>)
+print(<span class="hljs-string">f"Columns: <span class="hljs-subst">{list(full_df.columns)}</span>"</span>)
+</div></code></pre>
+<p>让我快速解释一下不同的合并类型。理解这些对于正确处理数据至关重要。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">连接类型 (<code>how</code>)</th>
+<th style="text-align:left">类比</th>
+<th style="text-align:left">保留的数据</th>
+<th style="text-align:left">使用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>inner</code> (内连接)</td>
+<td style="text-align:left">两个圆的交集</td>
+<td style="text-align:left">仅保留在<strong>两个</strong>表中键都匹配的行</td>
+<td style="text-align:left">只关心完整匹配的数据</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>left</code> (左连接)</td>
+<td style="text-align:left">保留左边圆的全部</td>
+<td style="text-align:left">保留<strong>左</strong>表的所有行,以及右表中匹配的行</td>
+<td style="text-align:left">保留主表的完整性(如所有销售记录)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>right</code> (右连接)</td>
+<td style="text-align:left">保留右边圆的全部</td>
+<td style="text-align:left">保留<strong>右</strong>表的所有行,以及左表中匹配的行</td>
+<td style="text-align:left">类似left,但主表在右边</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>outer</code> (外连接)</td>
+<td style="text-align:left">两个圆的并集</td>
+<td style="text-align:left">保留<strong>两个</strong>表的所有行,不匹配处用NaN填充</td>
+<td style="text-align:left">需要看到所有数据,包括不匹配的</td>
+</tr>
+</tbody>
+</table>
+<p>在我们的案例中,使用 <code>left</code> 连接确保了不会丢失任何销售记录,即使某些产品或客户信息可能缺失。</p>
+<hr>
+<h2 id="%E7%AC%AC%E5%85%AB%E8%8A%82%E6%A8%A1%E5%9D%97%E4%B8%83---%E5%88%86%E7%BB%84%E4%B8%8E%E8%81%9A%E5%90%88"><strong>第八节:模块七 - 分组与聚合</strong></h2>
+<p><strong>(39:00 - 45:30)</strong></p>
+<p>太棒了!我们现在终于拥有了一个干净、统一、完整的数据集。现在,我们可以回答老板最初的问题了:欧洲市场哪个产品类别的销售额最高?我们将使用数据分析中最强大的思想之一:&quot;拆分-应用-合并&quot;(Split-Apply-Combine)策略。</p>
+<p>这个策略很简单:我们先把数据按某个标准(比如产品类别)<strong>拆分</strong>成不同的小组,然后对每个小组<strong>应用</strong>一个计算(比如求和),最后把所有结果<strong>合并</strong>成一个新的汇总表。</p>
+<p>在Pandas中,这通过 <code>groupby()</code> 函数实现。让我们来找出欧洲市场每个产品类别的总销售额。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 按产品类别分组,并计算每个类别的销售总额</span>
+category_sales = full_df.groupby(<span class="hljs-string">'category'</span>)[<span class="hljs-string">'final_sales'</span>].sum()
+
+<span class="hljs-comment"># 排序以找出最畅销的类别</span>
+top_categories = category_sales.sort_values(ascending=<span class="hljs-literal">False</span>)
+
+print(<span class="hljs-string">"Sales by Category (Europe, Valid Orders):"</span>)
+print(top_categories)
+print(<span class="hljs-string">f"\n最畅销类别: <span class="hljs-subst">{top_categories.index[<span class="hljs-number">0</span>]}</span>"</span>)
+print(<span class="hljs-string">f"销售额: $<span class="hljs-subst">{top_categories.iloc[<span class="hljs-number">0</span>]:,<span class="hljs-number">.2</span>f}</span>"</span>)
+</div></code></pre>
+<p>我们来拆解这行核心代码:<code>full_df.groupby('category')</code> 完成了&quot;拆分&quot;,按类别将数据分组;<code>['final_sales']</code> 选择了我们要操作的列;<code>.sum()</code> 则是我们&quot;应用&quot;的聚合函数,计算每组的总和。</p>
+<p><code>groupby()</code> 的一个强大之处在于,我们可以使用 <code>.agg()</code> 方法一次性应用多种聚合函数。让我们创建一个更全面的分析报告。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 对每个类别应用多种聚合</span>
+category_summary = full_df.groupby(<span class="hljs-string">'category'</span>).agg(
+    total_sales=(<span class="hljs-string">'final_sales'</span>, <span class="hljs-string">'sum'</span>),
+    average_sale=(<span class="hljs-string">'final_sales'</span>, <span class="hljs-string">'mean'</span>),
+    number_of_transactions=(<span class="hljs-string">'transaction_id'</span>, <span class="hljs-string">'count'</span>),
+    average_discount=(<span class="hljs-string">'discount'</span>, <span class="hljs-string">'mean'</span>),
+    max_single_sale=(<span class="hljs-string">'final_sales'</span>, <span class="hljs-string">'max'</span>)
+).round(<span class="hljs-number">2</span>)
+
+<span class="hljs-comment"># 按总销售额排序</span>
+category_summary = category_summary.sort_values(by=<span class="hljs-string">'total_sales'</span>, ascending=<span class="hljs-literal">False</span>)
+
+print(<span class="hljs-string">"\n完整的类别分析报告:"</span>)
+print(category_summary)
+</div></code></pre>
+<p>这种&quot;命名聚合&quot;的语法非常清晰易读,是现代Pandas的最佳实践。现在,我们不仅回答了老板的问题,还提供了更丰富的洞察:每个类别的平均订单金额、交易次数、平均折扣率,甚至最高单笔交易。</p>
+<p>让我们再做一个有趣的分析:看看不同订单状态的销售分布。</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># 分析不同状态订单的情况(使用完整数据集,不仅仅是欧洲)</span>
+status_analysis = sales_df.groupby(<span class="hljs-string">'status'</span>).agg(
+    transaction_count=(<span class="hljs-string">'transaction_id'</span>, <span class="hljs-string">'count'</span>),
+    total_revenue=(<span class="hljs-string">'final_sales'</span>, <span class="hljs-string">'sum'</span>),
+    avg_order_value=(<span class="hljs-string">'final_sales'</span>, <span class="hljs-string">'mean'</span>)
+).round(<span class="hljs-number">2</span>)
+
+print(<span class="hljs-string">"\n订单状态分析:"</span>)
+print(status_analysis)
+
+<span class="hljs-comment"># 计算有效订单的比例</span>
+total_transactions = len(sales_df)
+valid_transactions = len(sales_df[sales_df[<span class="hljs-string">'status'</span>].isin([<span class="hljs-string">'Shipped'</span>, <span class="hljs-string">'Pending'</span>])])
+print(<span class="hljs-string">f"\n有效订单比例: <span class="hljs-subst">{valid_transactions/total_transactions*<span class="hljs-number">100</span>:<span class="hljs-number">.1</span>f}</span>%"</span>)
+
+<span class="hljs-comment"># 计算因退货和取消而损失的潜在收入</span>
+lost_revenue = sales_df[sales_df[<span class="hljs-string">'status'</span>].isin([<span class="hljs-string">'Returned'</span>, <span class="hljs-string">'Cancelled'</span>])][<span class="hljs-string">'final_sales'</span>].sum()
+print(<span class="hljs-string">f"因退货和取消损失的收入: $<span class="hljs-subst">{lost_revenue:,<span class="hljs-number">.2</span>f}</span>"</span>)
+</div></code></pre>
+<hr>
+<h2 id="%E7%AC%AC%E4%B9%9D%E8%8A%82%E6%80%BB%E7%BB%93%E4%B8%8E%E5%AE%9E%E8%B7%B5%E6%8C%91%E6%88%98"><strong>第九节:总结与实践挑战</strong></h2>
+<p><strong>(45:30 - 47:00)</strong></p>
+<p>我们成功了!让我回顾一下我们的完整旅程。我们从三个混乱、分散的文件开始,这些文件包含缺失值、格式不一致,甚至连核心的销售额字段都不存在。通过遵循专业的数据分析流程,我们完成了八个关键步骤:</p>
+<ol>
+<li><strong>加载数据</strong> - 从CSV、Excel和JSON三种格式导入</li>
+<li><strong>检视数据</strong> - 使用.head()、.info()和.describe()了解数据结构</li>
+<li><strong>清洗数据</strong> - 对比dropna()和fillna(),使用多种填充策略(0、&quot;Unknown&quot;、平均值、中位数)</li>
+<li><strong>特征工程</strong> - 计算final_sales = quantity × list_price × (1 - discount)</li>
+<li><strong>筛选数据</strong> - 只保留欧洲地区的有效订单</li>
+<li><strong>排序数据</strong> - 掌握sort_values()和sort_index()的区别</li>
+<li><strong>合并数据</strong> - 将三个表连接成统一数据集</li>
+<li><strong>分组聚合</strong> - 按类别分析,得出最终答案</li>
+</ol>
+<p>这个流程,就是数据分析师使用Pandas解决问题的通用工作流。</p>
+<p>我想特别强调今天课程中的几个关键要点:</p>
+<p><strong>第一</strong>,缺失值处理是一门艺术,不是科学。<code>dropna()</code> 简单但危险,可能会丢失大量数据。<code>fillna()</code> 更灵活,但需要根据业务逻辑选择正确的填充策略。</p>
+<p><strong>第二</strong>,排序看似简单,但要理解 <code>sort_values()</code> 和 <code>sort_index()</code> 的区别。前者按数据值排序用于分析,后者按索引标签排序用于恢复顺序。</p>
+<p><strong>第三</strong>,特征工程是数据分析的核心技能。真实世界的数据往往不会直接给你想要的指标,你需要自己创造。</p>
+<p><strong>第四</strong>,分组聚合是回答商业问题的利器。掌握了groupby()和agg(),你就能回答几乎所有&quot;哪个...最...&quot;类型的问题。</p>
+<hr>
+<h2 id="%E8%A7%86%E9%A2%91%E7%BB%93%E5%B0%BE"><strong>视频结尾</strong></h2>
+<p><strong>(47:00 - 47:30)</strong></p>
+<p>感谢您的观看。希望本课程对您有所帮助。请务必完成实践活动,因为亲自动手是最好的学习方式。数据分析不是理论课,而是一门需要大量实践的技能。如果您有任何问题,请随时联系我。记住,每一个专业的数据分析师都是从清洗第一个CSV文件开始的。继续加油,下次再见!</p>
+
+</body>
+</html>
