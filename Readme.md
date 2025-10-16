@@ -31,7 +31,7 @@ This video covers essential Pandas techniques for data cleaning and analysis, de
 
 The video recording quality is moderate due to equipment limitations. If any part is unclear, please refer to the **speech draft.md** in this repository, which include:
 
-- Complete bilingual lecture script with code examples
+- Complete bilingual lecture script with code examples(直接看那个叫“视频文案”的文件就可以了，这视频录的我自己都不知道自己在说什么🤡)
 - Step-by-step explanations for each concept
 - Sample datasets for practice
 - All code used in the video
